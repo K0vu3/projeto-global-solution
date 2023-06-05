@@ -1,0 +1,1 @@
+# projeto-global-solotion
