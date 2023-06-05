@@ -3,6 +3,7 @@ package br.com.bytewizards.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +18,13 @@ import br.com.bytewizards.api.service.OngService;
 
 @RestController
 @RequestMapping("/api/v1/ong")
+@CrossOrigin(origins = "*")
 public class OngController {
 
 	@Autowired
 	OngService service;
 
-	@GetMapping
+	@GetMapping("/listar")
 	public List<OngEntity> getAllOngs() {
 		return service.getAllOngs();
 	}
@@ -32,7 +34,7 @@ public class OngController {
 		return service.getOngById(id);
 	}
 
-	@PostMapping
+	@PostMapping("/cadastrar")
 	public OngEntity createOng(@RequestBody OngEntity ong) {
 		return service.createOng(ong);
 	}
