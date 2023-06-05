@@ -20,13 +20,20 @@ public class DoacaoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID_DOACAO")
     private Long id;
 
+    @Column(name="DATA_DOACAO")
     private LocalDate data;
 
-//    private DoadorEntity doador;
+    @ManyToOne
+    @JoinColumn(name="ID_DOADOR")
+    private DoadorEntity doador;
 
-//    private OngEntity ong;
+    @ManyToOne
+    @JoinColumn(name="ID_ONG")
+    private OngEntity ong;
 
+    @Column(name="ATIVO")
     private Boolean ativo;
 }

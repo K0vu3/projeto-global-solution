@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="TB_DOADOR")
 @Getter
@@ -17,20 +19,33 @@ public class DoadorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID_DOADOR")
     private Long id;
 
+    @Column(name="NM_DOADOR")
     private String nome;
 
     @Enumerated(EnumType.STRING)
+    @Column(name="TIPO_PESSOA")
     private TipoPessoa tipo;
 
+    @Column(name="DOCUMENTO_DOADOR")
     private String documento;
 
+    @Column(name="EMAIL_DOADOR")
     private String email;
 
+    @Column(name="TELEFONE_DOADOR")
     private String telefone;
 
+    @Column(name="ATIVO")
     private Boolean ativo;
+
+    @OneToMany(mappedBy = "doador")
+    private List<AlimentoEntity> alimentos;
+
+    @OneToMany(mappedBy = "doador")
+    private List<DoacaoEntity> doacoes;
 
 
 }
