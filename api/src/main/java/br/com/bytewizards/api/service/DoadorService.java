@@ -25,7 +25,7 @@ public class DoadorService {
 
 
     public Page<ListarDoadorDto> listarTodos(Pageable paginacao) {
-        return repository.findAllByActiveTrue(paginacao).map(ListarDoadorDto::new);
+        return repository.findAllByAtivoTrue(paginacao).map(ListarDoadorDto::new);
     }
 
     public void excluir(Long id) {

@@ -1,11 +1,13 @@
 package br.com.bytewizards.api.entity;
 
+import br.com.bytewizards.api.entity.dto.CadastroOngDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -41,11 +43,16 @@ public class OngEntity {
     private Boolean ativo;
 
     @OneToMany(mappedBy = "ong")
-    private List<DoacaoEntity> doacoes;
-
-    @OneToMany(mappedBy = "ong")
-    private List<AlimentoEntity> alimentos;
-
-    @OneToMany(mappedBy = "ong")
     private List<DistribuicaoEntity> distribuicoes;
+
+
+    public OngEntity(CadastroOngDto dados) {
+        this.ativo = true;
+        this.cnpj = dados.cnpj();
+        this.nome = dados.nome();
+        this.telefone = dados.telefone();
+        this.email = dados.email();
+        this.endereco = new EnderecoEntity(dados.endereco());
+        this.distribuicoes = new ArrayList<>();
+    }
 }

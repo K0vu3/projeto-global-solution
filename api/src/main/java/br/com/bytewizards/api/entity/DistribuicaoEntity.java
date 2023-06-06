@@ -42,4 +42,8 @@ public class DistribuicaoEntity {
     @JoinColumn(name="ID_ONG")
     private OngEntity ong;
 
+    @ManyToOne
+    @JoinColumn(name="ID_DOACAO")
+    private DoacaoEntity doacao;
+
 }

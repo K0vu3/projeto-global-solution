@@ -44,9 +44,6 @@ public class DoadorEntity {
     private Boolean ativo;
 
     @OneToMany(mappedBy = "doador")
-    private List<AlimentoEntity> alimentos;
-
-    @OneToMany(mappedBy = "doador")
     private List<DoacaoEntity> doacoes;
 
 
@@ -57,7 +54,6 @@ public class DoadorEntity {
         this.documento = dados.documento();
         this.email = dados.email();
         this.telefone = dados.telefone();
-        this.alimentos = new ArrayList<>();
         this.doacoes = new ArrayList<>();
     }
 }
