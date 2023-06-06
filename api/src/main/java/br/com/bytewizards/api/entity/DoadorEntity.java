@@ -1,12 +1,14 @@
 package br.com.bytewizards.api.entity;
 
+import br.com.bytewizards.api.entity.dto.CadastroDoadorDto;
 import br.com.bytewizards.api.entity.enums.TipoPessoa;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,4 +50,14 @@ public class DoadorEntity {
     private List<DoacaoEntity> doacoes;
 
 
+    public DoadorEntity(CadastroDoadorDto dados) {
+        this.ativo = true;
+        this.nome = dados.nome();
+        this.tipo = dados.tipo();
+        this.documento = dados.documento();
+        this.email = dados.email();
+        this.telefone = dados.telefone();
+        this.alimentos = new ArrayList<>();
+        this.doacoes = new ArrayList<>();
+    }
 }
