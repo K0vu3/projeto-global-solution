@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DoacaoRepository extends JpaRepository<Long, DoacaoEntity> {
+public interface DoacaoRepository extends JpaRepository<DoacaoEntity, Long> {
 }

@@ -2,7 +2,14 @@ package br.com.bytewizards.api.controller;
 
 import java.util.List;
 
+import br.com.bytewizards.api.entity.dto.AtualizarOngDto;
+import br.com.bytewizards.api.entity.dto.CadastroOngDto;
+import br.com.bytewizards.api.entity.dto.InfoOngDto;
+import br.com.bytewizards.api.entity.dto.ListarOngDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bytewizards.api.entity.OngEntity;
 import br.com.bytewizards.api.service.OngService;
+import org.springframework.web.util.UriBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/ong")
@@ -25,28 +37,38 @@ public class OngController {
 	OngService service;
 
 	@GetMapping("/listar")
-	public List<OngEntity> getAllOngs() {
-		return service.getAllOngs();
+	public ResponseEntity<Page<ListarOngDto>> listar(Pageable paginacao) {
+		return ResponseEntity.ok(service.listarTodos(paginacao));
 	}
 
 	@GetMapping("/{id}")
-	public OngEntity getOngById(@PathVariable Long id) {
-		return service.getOngById(id);
+	public ResponseEntity buscarPorId(@PathVariable Long id) {
+		OngEntity ong = service.buscarPorId(id);
+		return ResponseEntity.ok(new InfoOngDto(ong));
 	}
 
 	@PostMapping("/cadastrar")
-	public OngEntity createOng(@RequestBody OngEntity ong) {
-		return service.createOng(ong);
+	public ResponseEntity criar(@RequestBody CadastroOngDto dados, UriComponentsBuilder uriBuilder) {
+		OngEntity ong = new OngEntity(dados);
+		service.cadastrar(ong);
+
+		var uri = uriBuilder.path("/api/v1/ong/{id}").buildAndExpand(ong.getId()).toUri();
+		return ResponseEntity.created(uri).body(new InfoOngDto(ong));
+
 	}
 
 	@PutMapping("/{id}")
-	public OngEntity updateOng(@PathVariable Long id, @RequestBody OngEntity ong) {
-		return service.updateOng(id, ong);
+	public ResponseEntity atualizar(@RequestBody @Valid AtualizarOngDto dados) {
+		OngEntity ong = service.atualizar(dados);
+		return ResponseEntity.ok(new InfoOngDto(ong));
+
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteOng(@PathVariable Long id) {
-		service.deleteOng(id);
+	@Transactional
+	public ResponseEntity excluir(@PathVariable Long id) {
+		service.excluir(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }

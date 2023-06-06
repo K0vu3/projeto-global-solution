@@ -15,7 +15,7 @@ public class OngService {
 	@Autowired
 	OngRepository repository;
 
-	public List<OngEntity> getAllOngs() {
+	public List<OngEntity> listarTodos() {
 		return repository.findAll();
 	}
 
