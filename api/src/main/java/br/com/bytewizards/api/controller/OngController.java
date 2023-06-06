@@ -1,6 +1,5 @@
 package br.com.bytewizards.api.controller;
 
-import java.util.List;
 
 import br.com.bytewizards.api.entity.dto.AtualizarOngDto;
 import br.com.bytewizards.api.entity.dto.CadastroOngDto;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bytewizards.api.entity.OngEntity;
 import br.com.bytewizards.api.service.OngService;
-import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
@@ -67,7 +65,7 @@ public class OngController {
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity excluir(@PathVariable Long id) {
-		service.excluir(id);
+		service.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
 

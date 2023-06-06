@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface DoadorRepository extends JpaRepository<DoadorEntity, Long> {
 
 
-    Page<DoadorEntity> findAllByActiveTrue(Pageable paginacao);
+    Page<DoadorEntity> findAllByAtivoTrue(Pageable paginacao);
 }

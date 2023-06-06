@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="TB_DOACAO")
@@ -26,14 +27,14 @@ public class DoacaoEntity {
     @Column(name="DATA_DOACAO")
     private LocalDate data;
 
+    @OneToMany
+    private List<DistribuicaoEntity> distribuicoes;
+
+    @ManyToOne
+    @JoinColumn(name="ID_ALIMENTO")
+    private AlimentoEntity alimento;
+
     @ManyToOne
     @JoinColumn(name="ID_DOADOR")
     private DoadorEntity doador;
-
-    @ManyToOne
-    @JoinColumn(name="ID_ONG")
-    private OngEntity ong;
-
-    @Column(name="ATIVO")
-    private Boolean ativo;
 }
