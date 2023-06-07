@@ -50,4 +50,8 @@ public class DoadorService {
         }
         return null;
     }
+
+    public DoadorEntity buscarPorId(Long id) {
+        return repository.getReferenceById(id);
+    }
 }

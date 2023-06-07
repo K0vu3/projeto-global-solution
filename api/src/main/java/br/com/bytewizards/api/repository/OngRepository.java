@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OngRepository extends JpaRepository<OngEntity, Long> {
 
-    Page<ListarOngDto> findAllByAtivoTrue(Pageable paginacao);
+    Page<OngEntity> findAllByAtivoTrue(Pageable paginacao);
 }
