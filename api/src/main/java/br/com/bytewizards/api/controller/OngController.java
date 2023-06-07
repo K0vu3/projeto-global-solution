@@ -23,6 +23,8 @@ import br.com.bytewizards.api.entity.OngEntity;
 import br.com.bytewizards.api.service.OngService;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -38,15 +40,20 @@ public class OngController {
 	public ResponseEntity<Page<ListarOngDto>> listar(Pageable paginacao) {
 		return ResponseEntity.ok(service.listarTodos(paginacao));
 	}
+	
+	@GetMapping("/listarTodos")
+	public ResponseEntity<List<OngEntity>> listarTodos() {
+		return ResponseEntity.ok(service.listarTodosSemPaginacao());
+	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity buscarPorId(@PathVariable Long id) {
+	public ResponseEntity<InfoOngDto> buscarPorId(@PathVariable Long id) {
 		OngEntity ong = service.buscarPorId(id);
 		return ResponseEntity.ok(new InfoOngDto(ong));
 	}
 
 	@PostMapping("/cadastrar")
-	public ResponseEntity cadastrar(@RequestBody CadastroOngDto dados, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<InfoOngDto> cadastrar(@RequestBody CadastroOngDto dados, UriComponentsBuilder uriBuilder) {
 		OngEntity ong = new OngEntity(dados);
 		service.cadastrar(ong);
 

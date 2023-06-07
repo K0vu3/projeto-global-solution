@@ -1,15 +1,17 @@
 package br.com.bytewizards.api.service;
 
-import br.com.bytewizards.api.entity.DoadorEntity;
-import br.com.bytewizards.api.entity.dto.AtualizarDoadorDto;
-import br.com.bytewizards.api.entity.dto.ListarDoadorDto;
-import br.com.bytewizards.api.repository.DoadorRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import br.com.bytewizards.api.entity.DoadorEntity;
+import br.com.bytewizards.api.entity.dto.AtualizarDoadorDto;
+import br.com.bytewizards.api.entity.dto.ListarDoadorDto;
+import br.com.bytewizards.api.repository.DoadorRepository;
 
 @Service
 public class DoadorService {
@@ -22,6 +24,9 @@ public class DoadorService {
         repository.save(doador);
     }
 
+    public List<DoadorEntity> listar() {
+        return repository.findAll();
+    }
 
 
     public Page<ListarDoadorDto> listarTodos(Pageable paginacao) {

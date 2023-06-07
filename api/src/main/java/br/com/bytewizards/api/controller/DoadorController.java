@@ -11,15 +11,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1/doador")
 public class DoadorController {
 
     @Autowired
     private DoadorService service;
+    
+    @GetMapping("/listar")
+	public ResponseEntity<List<DoadorEntity>> listarTodos() {
+		return ResponseEntity.ok(service.listar());
+	}
 
 
     @PostMapping

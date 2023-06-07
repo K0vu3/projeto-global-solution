@@ -1,5 +1,6 @@
 package br.com.bytewizards.api.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import br.com.bytewizards.api.entity.dto.AtualizarOngDto;
@@ -20,6 +21,10 @@ public class OngService {
 
 	public Page<ListarOngDto> listarTodos(Pageable paginacao) {
 		return repository.findAllByAtivoTrue(paginacao).map(ListarOngDto::new);
+	}
+	
+	public List<OngEntity> listarTodosSemPaginacao() {
+		return repository.findAll();
 	}
 
 	public OngEntity buscarPorId(Long id) {
