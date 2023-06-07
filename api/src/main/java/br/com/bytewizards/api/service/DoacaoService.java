@@ -26,15 +26,15 @@ public class DoacaoService {
     @Autowired
     private DoadorRepository doadorRepository;
 
-    public DoacaoEntity cadastrar(DoacaoEntity doacao, CadastrarDoacaoDto dados) {
+    public DoacaoEntity cadastrar(DoacaoEntity doacao, CadastroDoacaoDto dados) {
         AlimentoEntity alimento = alimentoRepository.getReferenceById(dados.IdAlimento());
         alimento.setDataValidade(dados.dataValidade());
         alimento.setQuantidade(alimento.getQuantidade() + dados.quantidade());
         doacao.setAlimento(alimento);
 
         DoadorEntity doador = doadorRepository.getReferenceById(dados.idDoador());
-
         doacao.setDoador(doador);
+
         doacaoRepository.save(doacao);
         return doacao;
     }

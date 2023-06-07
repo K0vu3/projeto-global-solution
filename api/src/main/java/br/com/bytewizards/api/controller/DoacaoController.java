@@ -24,7 +24,7 @@ public class DoacaoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody @Valid CadastrarDoacaoDto dados, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity cadastrar(@RequestBody @Valid CadastroDoacaoDto dados, UriComponentsBuilder uriBuilder) {
         DoacaoEntity doacao = new DoacaoEntity();
         DoacaoEntity cadastrada = service.cadastrar(doacao, dados);
 
