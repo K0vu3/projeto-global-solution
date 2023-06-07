@@ -1,8 +1,6 @@
 package br.com.bytewizards.api.controller;
 
 import br.com.bytewizards.api.entity.AlimentoEntity;
-import br.com.bytewizards.api.entity.DoadorEntity;
-import br.com.bytewizards.api.entity.OngEntity;
 import br.com.bytewizards.api.entity.dto.*;
 import br.com.bytewizards.api.service.AlimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
