@@ -1,5 +1,6 @@
 package br.com.bytewizards.api.entity;
 
+import br.com.bytewizards.api.entity.dto.CadastroAlimentoDto;
 import br.com.bytewizards.api.entity.enums.TipoAlimento;
 import br.com.bytewizards.api.entity.enums.UnidadeMedida;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -44,7 +46,16 @@ public class AlimentoEntity {
     private Boolean ativo;
 
     @OneToMany(mappedBy = "alimento")
-    private List<DoacaoEntity> alimentos;
+    private List<DoacaoEntity> doacoes;
+
+
+    public AlimentoEntity(CadastroAlimentoDto dados) {
+        this.ativo = true;
+        this.nome = dados.nome();
+        this.tipo = dados.tipo();
+        this.unidadeMedida = dados.unidadeMedida();
+        this.doacoes = new ArrayList<>();
+    }
 
 
 }

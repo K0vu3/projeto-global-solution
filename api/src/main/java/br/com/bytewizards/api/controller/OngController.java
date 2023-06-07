@@ -46,7 +46,7 @@ public class OngController {
 	}
 
 	@PostMapping("/cadastrar")
-	public ResponseEntity criar(@RequestBody CadastroOngDto dados, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity cadastrar(@RequestBody CadastroOngDto dados, UriComponentsBuilder uriBuilder) {
 		OngEntity ong = new OngEntity(dados);
 		service.cadastrar(ong);
 
