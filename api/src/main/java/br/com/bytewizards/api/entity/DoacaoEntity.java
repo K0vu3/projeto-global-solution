@@ -1,7 +1,5 @@
 package br.com.bytewizards.api.entity;
 
-import br.com.bytewizards.api.entity.DoadorEntity;
-import br.com.bytewizards.api.entity.OngEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,10 +24,10 @@ public class DoacaoEntity {
     private Long id;
 
     @Column(name="DATA_DOACAO")
-    private LocalDate data;
+    private LocalDate data = LocalDate.now();
 
     @OneToMany
-    private List<DistribuicaoEntity> distribuicoes;
+    private List<DistribuicaoEntity> distribuicoes = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name="ID_ALIMENTO")
@@ -37,4 +36,8 @@ public class DoacaoEntity {
     @ManyToOne
     @JoinColumn(name="ID_DOADOR")
     private DoadorEntity doador;
+
+    private Boolean ativo = true;
+
+
 }
