@@ -1,5 +1,6 @@
 package br.com.bytewizards.api.entity;
 
+import br.com.bytewizards.api.entity.dto.CadastroDistribuicaoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity
 @Table(name="TB_DISTRIBUICAO")
@@ -30,10 +30,10 @@ public class DistribuicaoEntity {
     private LocalDate data;
 
     @Column(name="HORA_INICIO_DISTRIBUICAO")
-    private LocalTime horaInicio;
+    private String horaInicio;
 
     @Column(name="HORA_FIM_DISTRIBUICAO")
-    private LocalTime horaFim;
+    private String horaFim;
 
     @Column(name="ATIVO")
     private Boolean ativo;
@@ -45,5 +45,13 @@ public class DistribuicaoEntity {
     @ManyToOne
     @JoinColumn(name="ID_DOACAO")
     private DoacaoEntity doacao;
+
+    public DistribuicaoEntity(CadastroDistribuicaoDto dados) {
+        this.ativo = true;
+        this.endereco = new EnderecoEntity(dados.endereco());
+        this.data = dados.data();
+        this.horaInicio = dados.horaInicio();
+        this.horaFim = dados.horaFim();
+    }
 
 }

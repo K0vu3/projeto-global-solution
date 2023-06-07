@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-public record CadastrarDoacaoDto(
+public record CadastroDoacaoDto(
         @NotBlank
         Long idDoador,
         @NotBlank
