@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/doacoes")
+@RequestMapping("/api/v1/doacoes")
 public class DoacaoController {
 
     @Autowired

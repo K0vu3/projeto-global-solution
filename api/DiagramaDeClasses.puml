@@ -1,0 +1,182 @@
+@startuml
+class br.com.bytewizards.api.service.OngService {
++ Page<ListarOngDto> listarTodos(Pageable)
++ OngEntity buscarPorId(Long)
++ OngEntity cadastrar(OngEntity)
++ OngEntity atualizar(AtualizarOngDto)
++ void deletar(Long)
+}
+interface br.com.bytewizards.api.repository.DoadorRepository {
+}
+interface br.com.bytewizards.api.repository.OngRepository {
+}
+class br.com.bytewizards.api.service.AlimentoService {
+- AlimentoRepository repository
++ void cadastrar(AlimentoEntity)
++ Page<ListarAlimentoDto> listarTodos(Pageable)
++ void excluir(Long)
++ AlimentoEntity atualizar(AtualizarAlimentoDto)
++ AlimentoEntity buscarPorId(Long)
+}
+class br.com.bytewizards.api.entity.DoadorEntity {
+- Long id
+- String nome
+- TipoPessoa tipo
+- String documento
+- String email
+- String telefone
+- Boolean ativo
+- List<DoacaoEntity> doacoes
+}
+class br.com.bytewizards.api.entity.EnderecoEntity {
+- String logradouro
+- String numero
+- String complemento
+- String cep
+- String uf
+- String cidade
+}
+class br.com.bytewizards.api.controller.DistribuicaoController {
+- DistribuicaoService service
++ ResponseEntity create(CadastroDistribuicaoDto,UriComponentsBuilder)
++ ResponseEntity<Page<ListarDistribuicaoDto>> listar(Pageable)
++ ResponseEntity buscarPorId(Long)
++ ResponseEntity excluir(Long)
++ ResponseEntity atualizar(AtualizarDistribuicaoDto)
+}
+interface br.com.bytewizards.api.repository.DoacaoRepository {
+}
+class br.com.bytewizards.api.entity.DoacaoEntity {
+- Long id
+- LocalDate data
+- List<DistribuicaoEntity> distribuicoes
+- AlimentoEntity alimento
+- DoadorEntity doador
+- Boolean ativo
+}
+class br.com.bytewizards.api.entity.AlimentoEntity {
+- Long id
+- String nome
+- TipoAlimento tipo
+- Double quantidade
+- UnidadeMedida unidadeMedida
+- LocalDate dataValidade
+- Boolean ativo
+- List<DoacaoEntity> doacoes
+}
+class br.com.bytewizards.api.service.DoadorService {
+- DoadorRepository repository
++ void cadastrar(DoadorEntity)
++ Page<ListarDoadorDto> listarTodos(Pageable)
++ void excluir(Long)
++ DoadorEntity atualizar(AtualizarDoadorDto)
++ DoadorEntity buscarPorId(Long)
+}
+enum br.com.bytewizards.api.entity.enums.UnidadeMedida {
++  UNIDADE
++  QUILO
++  LITRO
+}
+class br.com.bytewizards.api.service.DoacaoService {
+- DoacaoRepository doacaoRepository
+- AlimentoRepository alimentoRepository
+- DoadorRepository doadorRepository
++ DoacaoEntity cadastrar(DoacaoEntity,CadastroDoacaoDto)
++ Page<ListarDoacaoDto> listarTodos(Pageable)
++ DoacaoEntity buscarPorId(Long)
++ void excluir(Long)
++ DoacaoEntity atualizar(AtualizarDoacaoDto)
+}
+class br.com.bytewizards.api.controller.DoacaoController {
+- DoacaoService service
++ ResponseEntity cadastrar(CadastroDoacaoDto,UriComponentsBuilder)
++ ResponseEntity<Page<ListarDoacaoDto>> listar(Pageable)
++ ResponseEntity buscarPorId(Long)
++ ResponseEntity excluir(Long)
++ ResponseEntity atualizar(AtualizarDoacaoDto)
+}
+class br.com.bytewizards.api.ApiGlobalSolutionApplication {
++ {static} void main(String[])
+}
+class br.com.bytewizards.api.entity.DistribuicaoEntity {
+- Long id
+- EnderecoEntity endereco
+- LocalDate data
+- String horaInicio
+- String horaFim
+- Boolean ativo
+- OngEntity ong
+- DoacaoEntity doacao
+}
+interface br.com.bytewizards.api.repository.DistribuicaoRepository {
+}
+class br.com.bytewizards.api.controller.AlimentoController {
+- AlimentoService service
++ ResponseEntity cadastrar(CadastroAlimentoDto,UriComponentsBuilder)
++ ResponseEntity<Page<ListarAlimentoDto>> listar(Pageable)
++ ResponseEntity buscarPorId(Long)
++ ResponseEntity excluir(Long)
++ ResponseEntity atualizar(AtualizarAlimentoDto)
+}
+enum br.com.bytewizards.api.entity.enums.TipoPessoa {
++  PF
++  PJ
+}
+class br.com.bytewizards.api.controller.DoadorController {
+- DoadorService service
++ ResponseEntity cadastrar(CadastroDoadorDto,UriComponentsBuilder)
++ ResponseEntity<Page<ListarDoadorDto>> listar(Pageable)
++ ResponseEntity buscarPorId(Long)
++ ResponseEntity excluir(Long)
++ ResponseEntity atualizar(AtualizarDoadorDto)
+}
+interface br.com.bytewizards.api.repository.AlimentoRepository {
+}
+class br.com.bytewizards.api.entity.OngEntity {
+- Long id
+- String cnpj
+- String nome
+- EnderecoEntity endereco
+- String telefone
+- String email
+- Boolean ativo
+- List<DistribuicaoEntity> distribuicoes
+}
+enum br.com.bytewizards.api.entity.enums.TipoAlimento {
++  VERDURA
++  FRUTA
++  VEGETAL
++  CARNE
++  GRAO
++  CEREAL
++  LACTEO
++  PROCESSADO
++  BEBIDA
+}
+class br.com.bytewizards.api.ApiGlobalSolutionApplicationTests {
+}
+class br.com.bytewizards.api.service.DistribuicaoService {
+- DistribuicaoRepository distribuicaoRepository
+- DoacaoRepository doacaoRepository
+- OngRepository ongRepository
++ void cadastrar(DistribuicaoEntity,CadastroDistribuicaoDto)
++ Page<ListarDistribuicaoDto> listarTodos(Pageable)
++ DistribuicaoEntity buscarPorId(Long)
++ void excluir(Long)
++ DistribuicaoEntity atualizar(AtualizarDistribuicaoDto)
+}
+class br.com.bytewizards.api.controller.OngController {
++ ResponseEntity<Page<ListarOngDto>> listar(Pageable)
++ ResponseEntity buscarPorId(Long)
++ ResponseEntity cadastrar(CadastroOngDto,UriComponentsBuilder)
++ ResponseEntity atualizar(AtualizarOngDto)
++ ResponseEntity excluir(Long)
+}
+
+
+org.springframework.data.jpa.repository.JpaRepository <|-- br.com.bytewizards.api.repository.DoadorRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- br.com.bytewizards.api.repository.OngRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- br.com.bytewizards.api.repository.DoacaoRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- br.com.bytewizards.api.repository.DistribuicaoRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- br.com.bytewizards.api.repository.AlimentoRepository
+@enduml
